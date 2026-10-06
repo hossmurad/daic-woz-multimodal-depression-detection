@@ -1,0 +1,2 @@
+participant_id,true_label,predicted_prob,threshold,top_features
+319,Depressed,0.786,0.4,audio_pca_0(+0.052); text_pca_1(+0.034); audio_pca_8(+0.029); text_pca_15(+0.029); text_pca_26(+0.023)

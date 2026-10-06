@@ -1,0 +1,56 @@
+# =============================================================================
+# DAIC-WOZ Multimodal Depression Detection - Configuration
+# =============================================================================
+# Authors: Md. Murad Hossain, MD. Foysal Ahammed Joy, Nuruzzaman Shuvo
+# Supervisor: Md. Morshed Ali
+# Department of Computer Science and Engineering, Uttara University
+# =============================================================================
+
+project:
+  name: "DAIC-WOZ Multimodal Depression Detection"
+  version: "1.0.0"
+  description: "Late Fusion multimodal framework with SHAP explainability"
+  random_seed: 42
+
+paths:
+  raw_data: "data/raw"
+  features: "data/features"
+  processed: "data/processed"
+  models: "models"
+  results: "results"
+  figures: "results/figures"
+  tables: "results/tables"
+  logs: "results/logs"
+
+features:
+  text:
+    model_name: "bert-base-uncased"
+    dimension: 768
+    max_length: 512
+  audio:
+    sample_rate: 16000
+    duration: 60
+    n_mfcc: 13
+    dimension: 54
+  visual:
+    dimension: 50
+    n_action_units: 17
+
+model:
+  name: "LateFusionRandomForest"
+  params:
+    n_estimators: 200
+    max_depth: 6
+    min_samples_leaf: 3
+    class_weight: "balanced_subsample"
+
+preprocessing:
+  text_pca: 30
+  audio_pca: 15
+  visual_pca: 10
+  smote_k_neighbors: 3
+
+evaluation:
+  cv_folds: 5
+  phq8_threshold: 10
+  optimal_threshold: 0.40
