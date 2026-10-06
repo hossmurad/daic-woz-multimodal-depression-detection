@@ -1,0 +1,4 @@
+Modality,SHAP Value,Contribution (%)
+Text,0.0672,29.2
+Audio,0.2545,51.0
+Visual,0.0,19.8

@@ -26,8 +26,8 @@ Depression is a common but serious mood disorder affecting over 280 million peop
 
 Recent advances in affective computing have demonstrated that depression manifests through multiple behavioral channels, including language use, speech prosody, and facial expressions. Multimodal machine learning offers the potential to combine these heterogeneous signals for objective, non-invasive screening. However, two critical gaps remain in the literature:
 
-1. **Incomplete multimodal integration**: Most existing works rely on unimodal features or early fusion, which fails to preserve modality-specific characteristics.
-2. **Lack of explainability**: High-performing deep learning models operate as black boxes, limiting clinician adoption.
+1. Incomplete multimodal integration: Most existing works rely on unimodal features or early fusion, which fails to preserve modality-specific characteristics.
+2. Lack of explainability: High-performing deep learning models operate as black boxes, limiting clinician adoption.
 
 ### 1.3 Contributions
 
@@ -68,11 +68,11 @@ We use the Distress Analysis Interview Corpus - Wizard of Oz (DAIC-WOZ), the gol
 
 ### 3.2 Feature Extraction
 
-**Textual (768-dim):** BERT-base-uncased contextual embeddings extracted from participant utterances only. Interviewer (Ellie) prompts are excluded to prevent shortcut bias.
+Textual (768-dim): BERT-base-uncased contextual embeddings extracted from participant utterances only. Interviewer (Ellie) prompts are excluded to prevent shortcut bias.
 
-**Acoustic (54-dim):** MFCC coefficients (13), chroma (12), pitch (2), energy (1), and zero-crossing rate (1) extracted via Librosa.
+Acoustic (54-dim): MFCC coefficients (13), chroma (12), pitch (2), energy (1), and zero-crossing rate (1) extracted via Librosa.
 
-**Visual (50-dim):** OpenFace Action Units (17 AUs, mean and standard deviation), head pose (6), and eye gaze (4).
+Visual (50-dim): OpenFace Action Units (17 AUs, mean and standard deviation), head pose (6), and eye gaze (4).
 
 ### 3.3 Late Fusion Architecture
 
@@ -126,7 +126,8 @@ Our proposed Late Fusion model achieves the best F1 (0.569) and AUC (0.697), rep
 | **All 3 (Late Fusion)** | **0.569** | **0.697** | **0.681** |
 | All 3 (No SMOTE) | 0.485 | 0.631 | 0.384 |
 
-**Key findings:**
+Key findings:
+
 - Audio is the strongest single modality (F1 = 0.505), followed by text (0.483) and visual (0.453).
 - Full three-modality fusion significantly outperforms all pairwise combinations.
 - Removing SMOTE reduces F1 by 0.084, demonstrating its critical role.
@@ -151,24 +152,24 @@ Our proposed Late Fusion model achieves the best F1 (0.569) and AUC (0.697), rep
 
 Our results demonstrate three key insights:
 
-1. **Late fusion outperforms early fusion:** Preserving modality-specific characteristics through per-modality PCA before fusion yields substantial AUC improvement over simple concatenation.
-2. **Acoustic modality is dominant:** 51 percent of the predictive signal comes from audio, consistent with clinical literature on psychomotor retardation in depression.
-3. **SHAP provides clinical trust:** Patient-level explanations highlight interpretable features (speech pauses, negative sentiment) that align with established DSM-5 markers.
+1. Late fusion outperforms early fusion: Preserving modality-specific characteristics through per-modality PCA before fusion yields substantial AUC improvement over simple concatenation.
+2. Acoustic modality is dominant: 51 percent of the predictive signal comes from audio, consistent with clinical literature on psychomotor retardation in depression.
+3. SHAP provides clinical trust: Patient-level explanations highlight interpretable features (speech pauses, negative sentiment) that align with established DSM-5 markers.
 
 ### 5.2 Clinical Implications
 
-Our framework addresses the "AI black-box" problem in mental health screening:
+Our framework addresses the AI black-box problem in mental health screening:
 
-- **For clinicians:** Patient-level SHAP explanations provide actionable insights.
-- **For screening:** High recall in some configurations minimizes missed diagnoses.
-- **For deployment:** Lightweight PCA plus Random Forest architecture enables edge deployment.
+- For clinicians: Patient-level SHAP explanations provide actionable insights.
+- For screening: High recall in some configurations minimizes missed diagnoses.
+- For deployment: Lightweight PCA plus Random Forest architecture enables edge deployment.
 
 ### 5.3 Limitations
 
-1. **Dataset size:** 184 participants is small relative to deep learning standards, though it matches DAIC-WOZ conventions.
-2. **Single dataset:** Results validated only on DAIC-WOZ; cross-dataset generalization remains untested.
-3. **Binary classification:** Continuous PHQ-8 severity regression is left for future work.
-4. **No live deployment:** Our work validates the software pipeline, not real-time clinical use.
+1. Dataset size: 184 participants is small relative to deep learning standards, though it matches DAIC-WOZ conventions.
+2. Single dataset: Results validated only on DAIC-WOZ; cross-dataset generalization remains untested.
+3. Binary classification: Continuous PHQ-8 severity regression is left for future work.
+4. No live deployment: Our work validates the software pipeline, not real-time clinical use.
 
 ### 5.4 Future Work
 
